@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 public class BST2 {
+
     private Player sroot;
 
     public void addScoreRegistryB(Player node){
@@ -24,7 +26,7 @@ public class BST2 {
                 addScoreRegistryB(scurrent.getRight(),node);
             }
         }else{
-            return;
+            //nothing
         }
 
     }
@@ -50,17 +52,28 @@ public class BST2 {
             getMaxB(scurrent.getRight());
         }
     }
+
     public void top5() {
-        top5(sroot);
+        ArrayList<Player> topPlayers = new ArrayList<>();
+        top5(sroot, topPlayers);
+        System.out.println("Top 5 players:");
+        for(Player player : topPlayers) {
+            System.out.println(player.getName() + " " + player.getScore());
+        }
     }
-    private void top5(Player scurrent){
-        if(scurrent == null){
+
+    private void top5(Player scurrent, ArrayList<Player> topPlayers) {
+        if(scurrent == null || topPlayers.size() == 5) {
             return;
         }
-        top5(scurrent.getRight());
-        System.out.println(" " + scurrent.getName() + " " + scurrent.getScore());
-        top5(scurrent.getLeft());
+        top5(scurrent.getRight(), topPlayers);
+        if(topPlayers.size() < 5) {
+            topPlayers.add(scurrent);
+            top5(scurrent.getLeft(), topPlayers);
+        }
     }
+
+
     public Player searchByScore(int goal){
         return searchByScore(sroot,goal);
     }
