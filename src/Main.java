@@ -45,7 +45,6 @@ public class Main {
                     treeA.alphabeticalOrder();
                     break;
                 case 4:
-                    System.out.println("The top 5 is: ");
                     treeB.top5();
                     break;
                 case 5:
